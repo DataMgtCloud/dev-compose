@@ -1,0 +1,13 @@
+
+consul:
+    image: datamgtcloud/consul:latest
+    hostname: consul
+    dns: 127.0.0.1
+    restart: always
+    ports:
+     - "8500:8500"
+    volumes:
+     - /data/consul:/data
+    environment:
+     - CONSUL_OPTIONS=-bootstrap
+
