@@ -1,22 +1,31 @@
 
 consul:
-    image: datamgtcloud/consul:latest
-    hostname: consul
-    dns: 127.0.0.1
-    restart: always
-    ports:
-     - "8500:8500"
-    volumes:
-     - /data/consul:/data
-    environment:
-     - CONSUL_OPTIONS=-bootstrap
+  image: datamgtcloud/consul:latest
+  hostname: consul
+  dns: 127.0.0.1
+  restart: always
+  ports:
+  - "8500:8500"
+  volumes:
+  - /data/consul:/data
+  environment:
+  - CONSUL_OPTIONS=-bootstrap
+
+
+nginx:
+  image: datamgtcloud/consulNginx:latest
+  hostname: nginx
+  dns: 127.0.0.1
+  restart: always
+  ports:
+  - "80:80"
+  links:
+  - consul:consul
 
 javademo:
-    image: datamgtcloud/javademo:latest
-    hostname: httpd
-    dns: 127.0.0.1
-    restart: always
-    ports:
-     - "8080:8080"
-    links:
-     - consul:consul
+  image: datamgtcloud/javademo:latest
+  hostname: javademo
+  dns: 127.0.0.1
+  restart: always
+  links:
+  - consul:consul
