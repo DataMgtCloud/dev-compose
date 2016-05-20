@@ -11,6 +11,16 @@ consul:
   environment:
   - CONSUL_OPTIONS=-bootstrap
 
+nginx:
+  image: datamgtcloud/consulnginx:latest
+  hostname: nginx
+  dns: 127.0.0.1
+  restart: always
+  ports:
+  - "80:80"
+  links:
+  - consul:consul
+
 javademo1:
   image: datamgtcloud/javademo:latest
   hostname: javademo1
